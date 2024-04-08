@@ -3,7 +3,6 @@ WIDTH = 800
 HEIGHT = 800
 
 caption = "Chess"
-bg_color = (0, 0, 0)
 
 ROWS = 8
 COLS = 8
