@@ -1,27 +1,34 @@
-import pygame
+import pygame, sys
 from const import *
-
-def mainloop():
-    pygame.init()
-
-    # Set up the drawing window
-    screen = pygame.display.set_mode([WIDTH, HEIGHT])
-    pygame.display.set_caption(caption)
-
-    # Run until the user asks ti quit
-    running = True
-    while running:
-        screen.fill(bg_color)
-        # Did the user click the window close button?
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        # Flip the display
-        pygame.display.flip()
+from game import Game
 
 
-    # Done! Time to quit.
-    pygame.quit()
+class Main:
+    """The main class in which game work."""
 
-mainloop()
+    def __init__(self):
+        pygame.init()
+        # Set up the drawing window
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption(caption)
+        self.game = Game()
+
+    def mainloop(self):
+        # Run until the user asks ti quit
+        running = True
+        while running:
+            self.game.show_bg(self.screen)
+            # Did the user click the window close button?
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        self.game.change_theme(self.screen)
+
+            # Flip the display
+            pygame.display.flip()
+
+main = Main()
+main.mainloop()
