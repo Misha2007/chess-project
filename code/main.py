@@ -18,6 +18,7 @@ class Main:
         running = True
         while running:
             self.game.show_bg(self.screen)
+            self.game.show_pieces(self.screen)
             # Did the user click the window close button?
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
