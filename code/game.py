@@ -1,7 +1,7 @@
 import pygame
 from const import *
 from board import Board
-from dragging import Dragging
+from dragger import Dragging
 from square import Square
 from config import Config
 
