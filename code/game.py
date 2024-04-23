@@ -12,15 +12,33 @@ class Game():
         self.current_theme = self.theme_light
 
     def show_bg(self, surface):
+        alphabet = ["a", "b", "c", "d", "e", "f", "g", "h"]
+        frame = (0, 0, WIDTH, HEIGHT)
+        color_frame = self.theme_light
+        # blit frame
+        pygame.draw.rect(surface, color_frame, frame)
+        frame2 = (19, 19, WIDTH - 38, HEIGHT- 38)
+        # blit frame
+        pygame.draw.rect(surface, (0,0,0), frame2)
         for row in range(ROWS):
+            # add numbers
+            number = row + 1
+            my_font = pygame.font.SysFont('Comic Sans MS', 30)
+            text_surface = my_font.render(str(number), False, self.theme_dark)
+            surface.blit(text_surface, (5, row * SQSIZE + 60))
             for col in range(COLS):
+                # add letters
+                character = alphabet[col]
+                my_font = pygame.font.SysFont('Comic Sans MS', 30)
+                text_surface2 = my_font.render(character, False, self.theme_dark)
+                surface.blit(text_surface2, (col * SQSIZE + 65, HEIGHT - 20))
+
                 if (row + col) % 2 == 0:
                     color = self.theme_light
                 else:
                     color = self.theme_dark
             
-                rect = (col * SQSIZE, row * SQSIZE, SQSIZE, SQSIZE)
-
+                rect = (col * SQSIZE + 20, row * SQSIZE + 20, SQSIZE, SQSIZE)
                 # blit
                 pygame.draw.rect(surface, color, rect)
 
@@ -45,6 +63,6 @@ class Game():
                     piece = self.board.squares[row][col].piece
 
                     img = pygame.image.load(piece.texture)
-                    img_center = col * SQSIZE + SQSIZE // 2, row * SQSIZE + SQSIZE // 2
+                    img_center = col * SQSIZE + SQSIZE // 2 + 20, row * SQSIZE + SQSIZE // 2 + 20
                     piece.texture_rect = img.get_rect(center=img_center)
                     surface.blit(img, piece.texture_rect)
