@@ -1,12 +1,12 @@
 # Screen dimensions
-WIDTH = 800
-HEIGHT = 800
+WIDTH = 840
+HEIGHT = 840
 
 caption = "Chess"
 
 ROWS = 8
 COLS = 8
-SQSIZE = WIDTH // COLS
+SQSIZE = (WIDTH - 40)// COLS
 
 themes = {(234, 235, 200): (119, 154, 88),
           (235, 209, 166): (165, 117, 80),
