@@ -1,6 +1,7 @@
 import pygame
 from const import *
 from board import Board
+from dragging import Dragging
 from square import Square
 
 class Game():
