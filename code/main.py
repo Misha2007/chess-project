@@ -18,6 +18,7 @@ class Main:
         running = True
         while running:
             self.game.show_bg(self.screen)
+            self.game.show_moves(self.screen)
             self.game.show_pieces(self.screen)
             # Did the user click the window close button?
             for event in pygame.event.get():
@@ -26,7 +27,8 @@ class Main:
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        self.game.change_theme(self.screen)
+                        self.game.change_theme(self
+                                               .screen)
 
             # Flip the display
             pygame.display.flip()

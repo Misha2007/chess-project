@@ -3,6 +3,7 @@ from const import *
 from board import Board
 from dragging import Dragging
 from square import Square
+from config import Config
 
 class Game():
     def __init__(self):
@@ -10,6 +11,8 @@ class Game():
         self.theme_light = (234, 235, 200)
         self.theme_dark = (119, 154, 88)
         self.current_theme = self.theme_light
+        self.dragger = Dragging()
+        self.config = Config()
 
     def show_bg(self, surface):
         alphabet = ["a", "b", "c", "d", "e", "f", "g", "h"]
@@ -66,3 +69,18 @@ class Game():
                     img_center = col * SQSIZE + SQSIZE // 2 + 20, row * SQSIZE + SQSIZE // 2 + 20
                     piece.texture_rect = img.get_rect(center=img_center)
                     surface.blit(img, piece.texture_rect)
+
+    def show_moves(self, surface):
+        theme = self.theme_dark
+
+        if self.dragger.dragging:
+            piece = self.dragger.piece
+
+            # loop all valid moves
+            for move in piece.moves:
+                # color
+                color = theme.moves.light if (move.final.row + move.final.col) % 2 == 0 else theme.moves.dark
+                # rect
+                rect = (move.final.col * SQSIZE, move.final.row * SQSIZE, SQSIZE, SQSIZE)
+                # blit
+                pygame.draw.rect(surface, color, rect)
