@@ -7,6 +7,7 @@ from config import Config
 
 class Game():
     def __init__(self):
+        self.next_player = "white"
         self.board = Board()
         self.theme_light = (234, 235, 200)
         self.theme_dark = (119, 154, 88)
@@ -74,7 +75,7 @@ class Game():
                         surface.blit(img, piece.texture_rect)
 
     def show_moves(self, surface):
-        theme = self.theme_dark
+        theme = self.config.theme
 
         if self.dragger.dragging:
             piece = self.dragger.piece
@@ -84,13 +85,42 @@ class Game():
                 # color
                 color = theme.moves.light if (move.final.row + move.final.col) % 2 == 0 else theme.moves.dark
                 # rect
-                rect = (move.final.col * SQSIZE, move.final.row * SQSIZE, SQSIZE, SQSIZE)
+                rect = (move.final.col * SQSIZE + SQSIZE // 2 - 30, move.final.row * SQSIZE + SQSIZE // 2 - 30, SQSIZE, SQSIZE)
                 # blit
                 pygame.draw.rect(surface, color, rect)
 
+    def show_last_move(self, surface):
+        theme = self.config.theme
+
+        if self.board.last_move:
+            initial = self.board.last_move.initial
+            final = self.board.last_move.final
+
+            for pos in [initial, final]:
+                # color
+                color = theme.trace.light if (pos.row + pos.col) % 2 == 0 else theme.trace.dark
+                # rect
+                rect = (pos.col * SQSIZE + SQSIZE // 2 - 30, pos.row * SQSIZE + SQSIZE // 2 - 30, SQSIZE, SQSIZE)
+                # blit
+                pygame.draw.rect(surface, color, rect)
+
+    def show_hover(self, surface):
+        if self.hovered_sqr:
+            # color
+            color = (180, 180, 180)
+            # rect
+            rect = (self.hovered_sqr.col * SQSIZE + SQSIZE // 2 - 30, self.hovered_sqr.row * SQSIZE + SQSIZE // 2 - 30, SQSIZE, SQSIZE)
+            # blit
+            pygame.draw.rect(surface, color, rect, width=3)
+
+    def next_turn(self):
+        self.next_player = 'white' if self.next_player == 'black' else 'black'
 
     def set_hover(self, row, col):
-        self.hovered_sqr = self.board.squares[row][col]
+        if len(self.board.squares) >= row:
+#             print(self.board.squares[row])
+            if len(self.board.squares[row]) >= col:
+                self.hovered_sqr = self.board.squares[row][col]
 
     def play_sound(self, captured=False):
         if captured:

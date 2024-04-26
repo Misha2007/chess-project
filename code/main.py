@@ -46,15 +46,15 @@ class Main:
                     if board.squares[clicked_row][clicked_col].has_piece():
                         piece = board.squares[clicked_row][clicked_col].piece
                         # valid piece (color) ?
-#                         if piece.color == game.next_player:
-                        board.calc_moves(piece, clicked_row, clicked_col, bool=True)
-                        dragger.save_initial(event.pos)
-                        dragger.drag_piece(piece)
-                        # show methods 
-                        game.show_bg(screen)
-                        game.show_last_move(screen)
-                        game.show_moves(screen)
-                        game.show_pieces(screen)
+                        if piece.color == game.next_player:
+                            board.calc_moves(piece, clicked_row, clicked_col, bool=True)
+                            dragger.save_initial(event.pos)
+                            dragger.drag_piece(piece)
+                            # show methods 
+                            game.show_bg(screen)
+                            game.show_last_move(screen)
+                            game.show_moves(screen)
+                            game.show_pieces(screen)
                 
                 # mouse motion
                 elif event.type == pygame.MOUSEMOTION:
@@ -70,7 +70,7 @@ class Main:
                         game.show_last_move(screen)
                         game.show_moves(screen)
                         game.show_pieces(screen)
-#                         game.show_hover(screen)
+                        game.show_hover(screen)
                         dragger.update_blit(screen)
                 
                 # click release
@@ -99,10 +99,10 @@ class Main:
                             game.play_sound(captured)
                             # show methods
                             game.show_bg(screen)
-#                             game.show_last_move(screen)
+                            game.show_last_move(screen)
                             game.show_pieces(screen)
                             # next turn
-#                             game.next_turn()
+                            game.next_turn()
                     
                     dragger.undrag_piece()
                 
@@ -110,8 +110,8 @@ class Main:
                 elif event.type == pygame.KEYDOWN:
                     
                     # changing themes
-                    if event.key == pygame.K_t:
-                        game.change_theme()
+                    if event.key == pygame.K_RETURN:
+                        game.change_theme(self.screen)
 
                      # changing themes
                     if event.key == pygame.K_r:
