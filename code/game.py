@@ -5,7 +5,7 @@ from dragger import Dragger
 from square import Square
 from config import Config
 
-class Game():
+class Game:
     def __init__(self):
         self.next_player = "white"
         self.board = Board()
@@ -112,15 +112,14 @@ class Game():
             rect = (self.hovered_sqr.col * SQSIZE + SQSIZE // 2 - 30, self.hovered_sqr.row * SQSIZE + SQSIZE // 2 - 30, SQSIZE, SQSIZE)
             # blit
             pygame.draw.rect(surface, color, rect, width=3)
-    
-    
+
     def next_turn(self):
         self.next_player = 'white' if self.next_player == 'black' else 'black'
 
     def set_hover(self, row, col):
         if len(self.board.squares) >= row+1:
-#             print(self.board.squares[row])
             if len(self.board.squares[row]) >= col+1:
+#                 print(self.board.squares[row])
                 self.hovered_sqr = self.board.squares[row][col]
 
     def play_sound(self, captured=False):
@@ -131,6 +130,3 @@ class Game():
 
     def reset(self):
         self.__init__()
-        
-    
-        
