@@ -5,7 +5,7 @@ from dragger import Dragger
 from square import Square
 from config import Config
 
-class Game():
+class Game:
     def __init__(self):
         self.next_player = "white"
         self.board = Board()
@@ -119,7 +119,6 @@ class Game():
 
     def set_hover(self, row, col):
         if len(self.board.squares) >= row+1:
-#             print(self.board.squares[row])
             if len(self.board.squares[row]) >= col+1:
                 self.hovered_sqr = self.board.squares[row][col]
 

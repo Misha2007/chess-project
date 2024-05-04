@@ -6,6 +6,7 @@ from const import *
 from game import Game
 from square import Square
 from move import Move
+from ai import AI
 
 THEME_GREEN = (51, 255, 90)
 THEME_WHITE = (255, 255, 255)
@@ -19,6 +20,8 @@ class Main:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption(caption)
         self.game = Game()
+
+        self.ai = AI()
         self.menu = None
         self.game_over = False
         self.winner = None
@@ -36,8 +39,6 @@ class Main:
     def start_game(self):
         self.menu.disable()
         self.mainloop()
-        
-        
 
     def mainloop(self):
         
@@ -57,6 +58,24 @@ class Main:
             self.game.show_pieces(self.screen)
             if dragger.dragging:
                 dragger.update_blit(screen)
+
+            if game.next_player == "black":
+                bot_move = self.ai.get_best_move(game.next_player, board)
+                if bot_move is not None:
+                    piece = bot_move[1]
+#                     if piece is not None:
+                    move = bot_move[0]
+        #                 print(move)
+                    board.move(piece, move)
+                    board.set_true_en_passant(piece)
+                    # show methods
+                    game.show_bg(screen)
+                    game.show_last_move(screen)
+                    game.show_pieces(screen)
+                    # next turn
+                    game.next_turn()
+                else:
+                    print("You won")
             # Did the user click the window close button?
             for event in pygame.event.get():
 
@@ -128,7 +147,6 @@ class Main:
                             game.show_pieces(screen)
                             # next turn
                             game.next_turn()
-                            
                     dragger.undrag_piece()
                     
                     
