@@ -32,16 +32,16 @@ class Main:
             self.game.show_bg(self.screen)
             self.game.show_moves(self.screen)
             self.game.show_pieces(self.screen)
+            if dragger.dragging:
+                dragger.update_blit(screen)
+
             if game.next_player == "black":
-#                 if self.ai.get_best_move(game.next_player, board)[0].has_piece():
-#                 print(self.ai.get_best_move(game.next_player, board))
-#                 print(self.ai.get_best_move(game.next_player, board))
-#                 print(self.ai.get_best_move(game.next_player, board))
-                if self.ai.get_best_move(game.next_player, board) is not None:
-#                     self.ai.made_steps.append(self.ai.get_best_move(game.next_player, board))
-#                     print(self.ai.get_best_move(game.next_player, board))
-                    piece = self.ai.get_best_move(game.next_player, board)[2]
-                    move = Move(self.ai.get_best_move(game.next_player, board)[0], self.ai.get_best_move(game.next_player, board)[1])
+                bot_move = self.ai.get_best_move(game.next_player, board)
+                if bot_move is not None:
+                    piece = bot_move[1]
+#                     if piece is not None:
+                    move = bot_move[0]
+        #                 print(move)
                     board.move(piece, move)
                     board.set_true_en_passant(piece)
                     # show methods
@@ -50,8 +50,8 @@ class Main:
                     game.show_pieces(screen)
                     # next turn
                     game.next_turn()
-            if dragger.dragging:
-                dragger.update_blit(screen)
+                else:
+                    print("You won")
             # Did the user click the window close button?
             for event in pygame.event.get():
 
@@ -106,7 +106,6 @@ class Main:
                         initial = Square(dragger.initial_row, dragger.initial_col)
                         final = Square(released_row, released_col)
                         move = Move(initial, final)
-#                         print(dragger.piece.moves)
 
                         # valid move ?
                         if board.valid_move(dragger.piece, move):

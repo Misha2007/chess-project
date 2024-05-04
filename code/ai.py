@@ -4,7 +4,9 @@ import sys
 from game import Game
 from move import Move
 from square import Square
-import random
+import numpy as np
+from random import randint
+
 
 class AI:
     def __init__(self, depth=0):
@@ -15,84 +17,51 @@ class AI:
 
     # Define function to get all possible moves for a player
     def get_all_moves(self, player, board):
+        c_moves = []
         moves = []
         for row in range(ROWS):
             for col in range(COLS):
-                moves.append((row, col))
-        return moves
-
-#     def get_moves_by_piece(self, player, board):
-#         x = []
-# #         if piece is not None:
-# #         print(self.get_all_moves(player, board))
-#         for step in self.get_all_moves(player, board):
-# #         while is_true:
-# #             x_step = random.randint(0, 7)
-# #             y_step = random.randint(0, 7)
-# #             self.get_all_moves(self, player, board)
-# #             step = [x_step, y_step]
-#             piece = board.squares[step[0]][step[1]].piece
-#             if piece is not None and piece.color == player:
-#                 board.calc_moves(piece, step[0], step[1], bool=True)
-# #                 return piece.moves
-#                 for piece_move in self.get_moves_by_piece(player, board):
-# #                         move = Move(piece_move.initial, piece_move.final)
-#                         if board.valid_move(piece, piece_move) and [piece_move.initial, piece_move.final, piece] not in self.made_steps:
-#                             print(piece.moves)
-# #                             list_steps = [piece, move]
-#                             x.append([piece_move.initial, piece_move.final, piece])
-# #                                 is_true = True
-# #             else:
-# #                 print("sd")
-#         if len(x) > 0:
-#             return x
-                            
+                if board.squares[row][col].has_piece():
+                    piece = board.squares[row][col].piece
+                    if piece.color == "black":
+                        if board.squares[row][col].has_enemy_piece("black"):
+#                                             print([row, col])
+                            c_moves.append((row, col))
+                        else:
+                            moves.append((row, col))
+        return [moves, c_moves]
         
 
     # Define function to get best move for AI opponent using decision tree model
     def get_best_move(self, player, board):
-        x = []
-        board = self.game.board
-        for step in self.get_all_moves(player, board):
-#         while is_true:
-#             x_step = random.randint(0, 7)
-#             y_step = random.randint(0, 7)
-#             self.get_all_moves(self, player, board)
-#             step = [x_step, y_step]
-            piece = board.squares[step[0]][step[1]].piece
-            if piece is not None and piece.color == player:
-                board.calc_moves(piece, step[0], step[1], bool=True)
-                for piece_move in piece.moves:
-# #                         move = Move(piece_move.initial, piece_move.final)
-                        if board.valid_move(piece, piece_move) and [piece_move.initial, piece_move.final, piece] not in self.made_steps:
-# #                             print(board.squares[piece_move.final.row][piece_move.final.col].has_piece(piece.color))
-                            if board.squares[piece_move.final.row][piece_move.final.col].has_enemy_piece(piece.color):
-#                             list_steps = [piece, move]
-                                x.append([piece_move.initial, piece_move.final, piece])
-                                is_true = True
-                                break
+        king_alive = False
+        cryt_moves = []
+        moves = []
+        if len(self.get_all_moves(player, board)[1]) == 0:
+            for move in self.get_all_moves(player, board)[0]:
+                piece = board.squares[move[0]][move[1]].piece
+                if piece.name == "king":
+                    king_alive = True
+                board.calc_moves(piece, move[0], move[1])
+#                 print(piece)
+                for new_move in piece.moves:
+                    move = new_move
+                    if board.valid_move(piece, move):
+                        if board.squares[new_move.final.row][new_move.final.col].has_enemy_piece("black"):
+                            if piece.name == "pawn":
+                                if move.initial.col != move.final.col:
+                                    cryt_moves.append([move, piece])
                             else:
-                                x.append([piece_move.initial, piece_move.final, piece])
+                                cryt_moves.append([move, piece])
                         else:
-                            piece = board.squares[step[0]][step[1]].piece
-        if len(x) > 0:
-            self.made_steps.append(x[-1])
-            print(self.made_steps[-1])
-            is_true = True
-            return self.made_steps[-1]
-#             if len(self.made_steps) > 0:
-#                 is_true = True
-#                 x = []
-#                 return self.made_steps[-1]
-#         print(x)
-#                 self.made_steps.pop(-1)
-#                 if len(self.made_steps) > 1:
-#                     del self.made_steps[-1]
-#             self.made_steps.append(x[-1])
-#                 print(self.made_steps[-1])
-#             is_true = True
-#                 x = []
-#         return self.get_moves_by_piece(player, board)
-#                 self.made_steps.append(x[-1])
-
+                            moves.append([move, piece])
+        if king_alive:
+            if len(cryt_moves) > 0:
+                return cryt_moves[0]
+            else:
+                if len(moves) > 0:
+                    valik = randint(0, len(moves)-1)
+                    return moves[valik]
+        else:
+            return None
 
