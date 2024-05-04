@@ -1,5 +1,6 @@
 import pygame
 import sys
+import pygame_menu as pm
 
 from const import *
 from game import Game
@@ -7,6 +8,8 @@ from square import Square
 from move import Move
 from ai import AI
 
+THEME_GREEN = (51, 255, 90)
+THEME_WHITE = (255, 255, 255)
 
 class Main:
     """The main class in which game work."""
@@ -17,7 +20,25 @@ class Main:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption(caption)
         self.game = Game()
+
         self.ai = AI()
+        self.menu = None
+        self.game_over = False
+        self.winner = None
+        
+    def create_menu(self):
+        self.menu = pm.Menu(title="Chess Game",
+                            width=WIDTH,
+                            height=HEIGHT,
+                            theme=pm.themes.THEME_GREEN)
+        
+        self.menu.add.button('Play', self.start_game)
+        self.menu.add.button('Quit', pygame.QUIT)
+        
+        
+    def start_game(self):
+        self.menu.disable()
+        self.mainloop()
 
     def mainloop(self):
         
@@ -25,6 +46,9 @@ class Main:
         game = self.game
         board = self.game.board
         dragger = self.game.dragger
+        
+        
+        
         
         # Run until the user asks ti quit
         running = True
@@ -124,6 +148,9 @@ class Main:
                             # next turn
                             game.next_turn()
                     dragger.undrag_piece()
+                    
+                    
+                    
                 
                 # key press
                 elif event.type == pygame.KEYDOWN:
@@ -144,8 +171,15 @@ class Main:
                     pygame.quit()
                     sys.exit()
             
+            
+            
             pygame.display.update()
 
+    
 
 main = Main()
+main.create_menu()
+main.menu.mainloop(main.screen)
 main.mainloop()
+
+
