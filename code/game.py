@@ -14,6 +14,7 @@ class Game:
         self.current_theme = self.theme_light
         self.dragger = Dragger()
         self.config = Config()
+        self.hovered_sqr = None
 
     def show_bg(self, surface):
         alphabet = ["a", "b", "c", "d", "e", "f", "g", "h"]
@@ -46,7 +47,7 @@ class Game:
                 # blit
                 pygame.draw.rect(surface, color, rect)
 
-    def change_theme(self, surface):
+    def change_theme(self, surface, x):
         # Get the keys (theme_light values) of the themes dictionary
         theme_light_keys = list(themes.keys())
     
@@ -54,7 +55,7 @@ class Game:
         current_index = theme_light_keys.index(self.theme_light)
     
         # Calculate the index of the next theme_light, looping back to the start if necessary
-        next_index = (current_index + 1) % len(themes)
+        next_index = (current_index + x) % len(themes)
     
         # Update the current theme_light and theme_dark to the next ones
         self.theme_light = theme_light_keys[next_index]
@@ -130,6 +131,3 @@ class Game:
 
     def reset(self):
         self.__init__()
-        
-    
-        
