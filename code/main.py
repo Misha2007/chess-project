@@ -1,10 +1,7 @@
 import pygame
-<<<<<<< HEAD
 import sys
-=======
 import sys, time
 import pygame_menu as pm
->>>>>>> origin/main
 
 from const import *
 from game import Game
@@ -12,11 +9,10 @@ from square import Square
 from move import Move
 from ai import AI
 
-<<<<<<< HEAD
-=======
+
 THEME_GREEN = (119, 154, 88)
 THEME_WHITE = (255, 255, 255)
->>>>>>> origin/main
+
 
 class Main:
     """The main class in which game work."""
@@ -27,9 +23,8 @@ class Main:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption(caption)
         self.game = Game()
-<<<<<<< HEAD
         self.ai = AI()
-=======
+
 
         self.play_with_ai = True
         self.ai = AI()
@@ -121,7 +116,7 @@ class Main:
 
     def play_choice(self):
         self.play_with_ai = not self.play_with_ai
->>>>>>> origin/main
+
 
     def mainloop(self):
         
@@ -140,7 +135,7 @@ class Main:
             game.show_hover(screen)
             if dragger.dragging:
                 dragger.update_blit(screen)
-<<<<<<< HEAD
+
             if game.next_player == "black":
                 piece = board.squares[self.ai.get_best_move(game.next_player, board)[0]][self.ai.get_best_move(game.next_player, board)[1]].piece
                 initial = Square(self.ai.get_best_move(game.next_player, board)[0], self.ai.get_best_move(game.next_player, board)[1])
@@ -155,7 +150,7 @@ class Main:
                 game.show_pieces(screen)
                 # next turn
                 game.next_turn()
-=======
+
             
             if self.game_over_bool:
                 self.game_over("WHITE")
@@ -176,7 +171,7 @@ class Main:
                         game.next_turn()
                     else:
                         self.game_over_bool = True
->>>>>>> origin/main
+
             # Did the user click the window close button?
             for event in pygame.event.get():
 
