@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from sklearn.tree import DecisionTreeClassifier
 from const import *
 import sys
@@ -49,7 +48,7 @@ class AI:
 #         clf.fit(X, y)
 #         move = clf.predict([[player, 0, 0, 0, 0]])[0]
             return [move[0], move[1], move[2], move[3]]
-=======
+
 from const import *
 import sys
 from game import Game
@@ -116,4 +115,3 @@ class AI:
         else:
             return None
 
->>>>>>> origin/main
