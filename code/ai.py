@@ -1,4 +1,3 @@
-from sklearn.tree import DecisionTreeClassifier
 from const import *
 import sys
 from game import Game
@@ -25,7 +24,6 @@ class AI:
                     piece = board.squares[row][col].piece
                     if piece.color == "black":
                         if board.squares[row][col].has_enemy_piece("black"):
-#                                             print([row, col])
                             c_moves.append((row, col))
                         else:
                             moves.append((row, col))
@@ -43,18 +41,19 @@ class AI:
                 if piece.name == "king":
                     king_alive = True
                 board.calc_moves(piece, move[0], move[1])
-#                 print(piece)
                 for new_move in piece.moves:
                     move = new_move
                     if board.valid_move(piece, move):
-                        if board.squares[new_move.final.row][new_move.final.col].has_enemy_piece("black"):
-                            if piece.name == "pawn":
-                                if move.initial.col != move.final.col:
+                        if not board.in_check(piece, move):
+                            if board.squares[new_move.final.row][new_move.final.col].has_enemy_piece("black"):
+                                if piece.name == "pawn":
+                                    if move.initial.col != move.final.col:
+                                        cryt_moves.append([move, piece])
+                                else:
                                     cryt_moves.append([move, piece])
                             else:
-                                cryt_moves.append([move, piece])
-                        else:
-                            moves.append([move, piece])
+                                if board.squares[new_move.final.row][new_move.final.col].isempty_or_enemy("black"):
+                                    moves.append([move, piece])
         if king_alive:
             if len(cryt_moves) > 0:
                 return cryt_moves[0]
