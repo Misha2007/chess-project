@@ -66,7 +66,8 @@ The objective of chess is to checkmate your opponent's king. This means putting 
 
 ## Screenshots
 ![image](https://github.com/Misha2007/chess-project/assets/55316381/32339ffc-dadb-484a-9150-51bea9029aeb)
-![image](https://github.com/Misha2007/chess-project/assets/55316381/118417e0-9153-4332-8456-cc36701a247b)
+![image](https://github.com/Misha2007/chess-project/assets/55316381/b719d60e-5073-472c-9d65-2e400a242e4f)
+
 
 ## Developer
 - Developed by: Mykhailo Drogovoz, Rasmo Kiin
