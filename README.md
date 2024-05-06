@@ -32,7 +32,6 @@ You can download the Chess project from the GitHub repository: [Chess GitHub Rep
     python main.py
     ```
 
-## How to Play
 # How to Play Chess
 
 Chess is a classic board game that has been enjoyed for centuries. It's a game of strategy, skill, and anticipation. Here's a brief overview of how to play:
@@ -66,8 +65,8 @@ The objective of chess is to checkmate your opponent's king. This means putting 
 2. If a player's king is in check and there is no legal move to remove the threat, it is checkmate, and the game ends with the player who achieved checkmate as the winner.
 
 ## Screenshots
-(![image](https://github.com/Misha2007/chess-project/assets/images/README/image.png)
-(![image](https://github.com/Misha2007/chess-project/assets/images/README/image2.png)
+(![image](https://github.com/Misha2007/chess-project/tree/main/assets/images/README/image.png)
+(![image](https://github.com/Misha2007/chess-project/tree/main/assets/images/README/image2.png)
 
 ## Developer
 - Developed by: Mykhailo Drogovoz, Rasmo Kiin
