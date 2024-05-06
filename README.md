@@ -22,7 +22,7 @@ This repository contains a chess implementation in Python. It allows players to 
     ```
 
 ## How to Download the Project
-You can download the Chess project from the GitHub repository: [Chess GitHub Repository]((https://github.com/Misha2007/chess-project))
+You can download the Chess project from the GitHub repository: [Chess GitHub Repository](https://github.com/Misha2007/chess-project)
 
 ## How to Run the Game
 1. Navigate to the directory where the project files are located.
@@ -66,8 +66,8 @@ The objective of chess is to checkmate your opponent's king. This means putting 
 2. If a player's king is in check and there is no legal move to remove the threat, it is checkmate, and the game ends with the player who achieved checkmate as the winner.
 
 ## Screenshots
-((https://ibb.co/m6pYT4n)
-((https://ibb.co/fkR843Y)
+(![image](https://github.com/Misha2007/chess-project/assets/images/README/image.png)
+(![image](https://github.com/Misha2007/chess-project/assets/images/README/image2.png)
 
 ## Developer
 - Developed by: Mykhailo Drogovoz, Rasmo Kiin
