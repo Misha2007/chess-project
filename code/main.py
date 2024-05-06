@@ -1,6 +1,10 @@
 import pygame
+<<<<<<< HEAD
+import sys
+=======
 import sys, time
 import pygame_menu as pm
+>>>>>>> origin/main
 
 from const import *
 from game import Game
@@ -8,8 +12,11 @@ from square import Square
 from move import Move
 from ai import AI
 
+<<<<<<< HEAD
+=======
 THEME_GREEN = (119, 154, 88)
 THEME_WHITE = (255, 255, 255)
+>>>>>>> origin/main
 
 class Main:
     """The main class in which game work."""
@@ -20,6 +27,9 @@ class Main:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption(caption)
         self.game = Game()
+<<<<<<< HEAD
+        self.ai = AI()
+=======
 
         self.play_with_ai = True
         self.ai = AI()
@@ -111,6 +121,7 @@ class Main:
 
     def play_choice(self):
         self.play_with_ai = not self.play_with_ai
+>>>>>>> origin/main
 
     def mainloop(self):
         
@@ -118,9 +129,6 @@ class Main:
         game = self.game
         board = self.game.board
         dragger = self.game.dragger
-        
-        
-        
         
         # Run until the user asks ti quit
         running = True
@@ -132,6 +140,22 @@ class Main:
             game.show_hover(screen)
             if dragger.dragging:
                 dragger.update_blit(screen)
+<<<<<<< HEAD
+            if game.next_player == "black":
+                piece = board.squares[self.ai.get_best_move(game.next_player, board)[0]][self.ai.get_best_move(game.next_player, board)[1]].piece
+                initial = Square(self.ai.get_best_move(game.next_player, board)[0], self.ai.get_best_move(game.next_player, board)[1])
+                final = Square(self.ai.get_best_move(game.next_player, board)[2], self.ai.get_best_move(game.next_player, board)[3])
+                move = Move(initial, final)
+                print(move)
+                board.move(piece, move)
+                board.set_true_en_passant(piece)
+                # show methods
+                game.show_bg(screen)
+                game.show_last_move(screen)
+                game.show_pieces(screen)
+                # next turn
+                game.next_turn()
+=======
             
             if self.game_over_bool:
                 self.game_over("WHITE")
@@ -152,6 +176,7 @@ class Main:
                         game.next_turn()
                     else:
                         self.game_over_bool = True
+>>>>>>> origin/main
             # Did the user click the window close button?
             for event in pygame.event.get():
 
@@ -214,6 +239,7 @@ class Main:
                         initial = Square(dragger.initial_row, dragger.initial_col)
                         final = Square(released_row, released_col)
                         move = Move(initial, final)
+                        print(move)
 
                         # valid move ?
                         if board.valid_move(dragger.piece, move):
@@ -232,9 +258,6 @@ class Main:
                             # next turn
                             game.next_turn()
                     dragger.undrag_piece()
-                    
-                    
-                    
                 
                 # key press
                 elif event.type == pygame.KEYDOWN:
@@ -254,15 +277,8 @@ class Main:
                 elif event.type == pygame.QUIT:
                     self.quit_game()
             
-            
-            
             pygame.display.update()
 
-    
 
 main = Main()
-main.create_menu()
-main.menu.mainloop(main.screen)
 main.mainloop()
-
-
