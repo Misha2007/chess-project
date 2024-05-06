@@ -65,8 +65,8 @@ The objective of chess is to checkmate your opponent's king. This means putting 
 2. If a player's king is in check and there is no legal move to remove the threat, it is checkmate, and the game ends with the player who achieved checkmate as the winner.
 
 ## Screenshots
-(![image](https://github.com/Misha2007/chess-project/tree/main/assets/images/README/image.png)
-(![image](https://github.com/Misha2007/chess-project/tree/main/assets/images/README/image2.png)
+![image](https://github.com/Misha2007/chess-project/assets/55316381/32339ffc-dadb-484a-9150-51bea9029aeb)
+![image](https://github.com/Misha2007/chess-project/assets/55316381/118417e0-9153-4332-8456-cc36701a247b)
 
 ## Developer
 - Developed by: Mykhailo Drogovoz, Rasmo Kiin
